@@ -75,9 +75,6 @@ docs/_build/
 .pybuilder/
 target/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
 # IPython
 profile_default/
 ipython_config.py
@@ -147,6 +144,10 @@ venv.bak/
 # Data directories
 data/*
 !data/README.md
+
+# artifacts
+artifacts/*
+!artifacts/README.md
 
 # Spyder project settings
 .spyderproject
