@@ -62,7 +62,6 @@ def load_data():
             if (spacecraft == "SMAP"): 
                 data = np.load(example_path)
                 df = pd.DataFrame(data)
-                print("(train) df: ", filename, df.shape, "index: ", index)
                 df.to_csv(f"data/raw/csv_format/train/{filename}.csv", index=False)
                 training_dfs.append(df) 
                 index += 1
@@ -81,12 +80,12 @@ def load_data():
             if (spacecraft == "SMAP"): 
                 data = np.load(example_path)
                 df = pd.DataFrame(data)
-                print("(test) df: ", filename, df.shape, "index: ", index)
                 df.to_csv(f"data/raw/csv_format/test/{filename}.csv", index=False)
                 test_dfs.append(df) 
                 file_names.append(filename)
                 
                 index += 1
+    print("[✓] Converted raw .npy files to .csv files")
 
 def retreive_data():
     """
@@ -207,7 +206,7 @@ def window_data(training_dfs, test_dfs, window_size, window_difference, label_df
                 transposed_window = np_window.T
                 normal_window = transposed_window.tolist() 
                 test_data[channel].append(normal_window)
-                
+    print("[✓] Windowed raw data")     
     return (training_data, test_data, label_data)
 
 def save_data(X_train_collection, X_test_collection, y_test_collection):
@@ -232,7 +231,6 @@ def save_data(X_train_collection, X_test_collection, y_test_collection):
             os.makedirs(path, exist_ok=True)
             np.save(path + f"/{channel}.npy", X_train)
             data[channel]["train"] = path + f"/{channel}.npy"
-            print("train: ", channel, "shape: ", X_train.shape)
         else:
             print("Error: duplicate training data sets")
     
@@ -246,10 +244,8 @@ def save_data(X_train_collection, X_test_collection, y_test_collection):
             os.makedirs(path, exist_ok=True)
             np.save(path + f"/{channel}.npy", X_test)
             data[channel]["test"] = path + f"/{channel}.npy"
-            print("test: ", channel, "shape: ", X_test.shape)
         else:
             print("Error: duplicate testing data sets")
-    
     
     for channel in y_test_collection:
         if data.get(channel) is None:
@@ -260,10 +256,10 @@ def save_data(X_train_collection, X_test_collection, y_test_collection):
             os.makedirs(path, exist_ok=True)
             np.save(path + f"/{channel}.npy", y_test)
             data[channel]["label"] = path + f"/{channel}.npy"
-            print("label: ", channel, "shape: ", y_test.shape)
         else:
             print("Error: duplicate label data sets")
-        
+    print("[✓] Saved windowed data")     
+
 def parse_args():
     """
     Parse command-line arguments for window configuration.

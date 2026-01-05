@@ -1,0 +1,9 @@
+Channel P
+---------
+Best threshold: -9.1533
+Precision (anomaly): 0.2607
+Recall (anomaly):    0.3932
+FDR:                 0.7393
+Confusion matrix:
+[[1432  329]
+ [ 179  116]]

@@ -16,27 +16,13 @@ All learned artifacts (MiniRocket transformers and scalers) are saved to the
 `artifacts/` directory, while transformed datasets are written to `data/processed/`.
 """
 
-from pathlib import Path
 import os
-import ast
-import shutil
 import argparse
 import joblib
 import pandas as pd
 import numpy as np
-import sklearn
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
-from sklearn.ensemble import IsolationForest
-from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay, precision_score, recall_score, fbeta_score, f1_score
-from sklearn.svm import OneClassSVM
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-from sklearn.neighbors import LocalOutlierFactor
-from sktime.transformations.panel.rocket import (
-    MiniRocket,
-    MiniRocketMultivariate,
-    MiniRocketMultivariateVariable,
-)
+from sktime.transformations.panel.rocket import MiniRocketMultivariate
 
 def load_channels(): 
     """
@@ -84,14 +70,10 @@ def transform_data(channel_names, kernels, jobs):
         X_transform_test = minirocket.transform(X_test)
 
         transformed_data[channel]["train"] = X_transform_train
-        print("train: ", channel, "shape: ", X_transform_train.shape)
         transformed_data[channel]["test"] = X_transform_test
-        print("test: ", channel, "shape: ", X_transform_test.shape)
         transformed_data[channel]["label"] = y_test
-        print("label: ", channel, "shape: ", y_test.shape)
 
     for channel in transformed_data: 
-        print("store: ", channel)
         X_transform_train = transformed_data[channel]["train"]
         X_transform_test = transformed_data[channel]["test"]
         y_test = transformed_data[channel]["label"]
@@ -111,6 +93,7 @@ def transform_data(channel_names, kernels, jobs):
         train_df.to_csv(training_data_path + f"/{channel}.csv", index=False)
         test_df.to_csv(testing_data_path + f"/{channel}.csv", index=False)
         label_df.to_csv(label_data_path + f"/{channel}.csv", index=False)  
+    print("[✓] Applied MiniRocket feature extraction")     
 
 def normalize_data(channel_names):
     """
@@ -145,12 +128,8 @@ def normalize_data(channel_names):
         standard_fitted_data[channel]["test"] = X_fit_test
         standard_fitted_data[channel]["label"] = y_test
         
-        print("train: ", channel, "shape: ", X_fit_train.shape)
-        print("test: ", channel, "shape: ", X_fit_test.shape)
-        print("label: ", channel, "shape: ", y_test.shape)
 
     for channel in standard_fitted_data: 
-        print("store: ", channel)
         X_fit_train = standard_fitted_data[channel]["train"]
         X_fit_test = standard_fitted_data[channel]["test"]
         y_test = standard_fitted_data[channel]["label"]
@@ -171,6 +150,8 @@ def normalize_data(channel_names):
         train_df.to_csv(training_data_path + f"/{channel}.csv", index=False)
         test_df.to_csv(testing_data_path + f"/{channel}.csv", index=False)
         label_df.to_csv(label_data_path + f"/{channel}.csv", index=False)  
+    print("[✓] Normalized data")     
+
 
 def parse_args():
     """

@@ -1,0 +1,103 @@
+Isolation Forest Evaluation Report
+===================================
+
+Channel R
+---------
+Best threshold: 0.1114
+Precision (anomaly): 0.1200
+Recall (anomaly):    0.4286
+FDR:                 0.8800
+Confusion matrix:
+[[334  22]
+ [  4   3]]
+
+Channel G
+---------
+Best threshold: 0.0374
+Precision (anomaly): 0.0152
+Recall (anomaly):    0.2157
+FDR:                 0.9848
+Confusion matrix:
+[[1643  711]
+ [  40   11]]
+
+Channel T
+---------
+Best threshold: 0.1178
+Precision (anomaly): 0.1649
+Recall (anomaly):    0.3386
+FDR:                 0.8351
+Confusion matrix:
+[[779 324]
+ [125  64]]
+
+Channel S
+---------
+Best threshold: 0.0523
+Precision (anomaly): 0.1364
+Recall (anomaly):    0.6000
+FDR:                 0.8636
+Confusion matrix:
+[[247  95]
+ [ 10  15]]
+
+Channel A
+---------
+Best threshold: 0.0617
+Precision (anomaly): 0.0180
+Recall (anomaly):    0.0306
+FDR:                 0.9820
+Confusion matrix:
+[[1890  928]
+ [ 539   17]]
+
+Channel F
+---------
+Best threshold: 0.0621
+Precision (anomaly): 0.0275
+Recall (anomaly):    0.0368
+FDR:                 0.9725
+Confusion matrix:
+[[906 212]
+ [157   6]]
+
+Channel D
+---------
+Best threshold: 0.0563
+Precision (anomaly): 0.2415
+Recall (anomaly):    0.3201
+FDR:                 0.7585
+Confusion matrix:
+[[2615 1090]
+ [ 737  347]]
+
+Channel E
+---------
+Best threshold: 0.0432
+Precision (anomaly): 0.0875
+Recall (anomaly):    0.2384
+FDR:                 0.9125
+Confusion matrix:
+[[3380 1502]
+ [ 460  144]]
+
+Channel B
+---------
+Best threshold: 0.0893
+Precision (anomaly): 0.1034
+Recall (anomaly):    0.5000
+FDR:                 0.8966
+Confusion matrix:
+[[371  26]
+ [  3   3]]
+
+Channel P
+---------
+Best threshold: 0.0612
+Precision (anomaly): 0.1896
+Recall (anomaly):    0.3966
+FDR:                 0.8104
+Confusion matrix:
+[[1261  500]
+ [ 178  117]]
+
