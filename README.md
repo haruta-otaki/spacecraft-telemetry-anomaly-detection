@@ -75,16 +75,14 @@ project-root/
 ## Pipeline Summary
 
 ### 1. Preprocessing
-- Channel-wise extraction from raw telemetry, exclusively using telemetry data from
-the SMAP satellite, as the SMAP and MSL datasets differ in sensor dimensionality (respectively containing 25 and 55 features). 
+- Channel-wise extraction from raw telemetry - the project exclusively used telemetry data from the SMAP satellite, as the SMAP and MSL datasets differ in sensor dimensionality (respectively containing 25 and 55 features). 
 
-- Sliding-window segmentation to provide a context-aware and robust representation of anomalous behaviour, reducing sensitivity to short-lived fluctuations while ensuring that each timestamp is assessed within the context of its surrounding temporal neighbourhood rather than in isolation.
+- Sliding-window segmentation - the overlapping window approach was utilized to provide a context-aware and robust representation of anomalous behaviour, reducing sensitivity to short-lived fluctuations while ensuring that each timestamp is assessed within the context of its surrounding temporal neighbourhood rather than in isolation.
 
-- Feature scaling and normalization, specifically Z-score scaling, to ensure that all
-features were on comparable scales. 
+- Feature scaling and normalization - Z-score scaling was implemented to ensure that all features were on comparable scales. 
 
 ### 2. Feature Extraction
-- MiniRocket transforms time-series windows into fixed-length feature vectors, enabling fast training and inference while preserving temporal structure.
+- MiniRocket - MiniRocket transforms time-series windows into fixed-length feature vectors, enabling fast training and inference while preserving temporal structure.
 
 ### 3. Models Implemented
 - One-Class SVM 
@@ -92,7 +90,7 @@ features were on comparable scales.
 - Local Outlier Factor (LOF)
 - Ensemble model
 
-The ensumble model is designed to combine multiple detectors to leverage the complementary strengths of the three algorithms: One-Class SVM defines the boundary of normal data, Isolation Forest isolates anomalies via recursive partitioning, and LOF measures local density deviations. The ensemble applies a “maximum voting” strategy with a threshold of one vote, flagging a test example as anomalous if any model predicts it as suchprioritizing recall.
+The ensemble model is designed to combine multiple detectors to leverage the complementary strengths of the three algorithms: One-Class SVM defines the boundary of normal data, Isolation Forest isolates anomalies via recursive partitioning, and LOF measures local density deviations. The ensemble applies a “maximum voting” strategy with a threshold of one vote, flagging a test example as anomalous if any model predicts it as suchprioritizing recall.
 
 ### 4. Evaluation Metrics
 - Precision (anomalous class)
