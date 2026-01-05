@@ -14,6 +14,9 @@ pipeline:
 
 All learned artifacts (MiniRocket transformers and scalers) are saved to the
 `artifacts/` directory, while transformed datasets are written to `data/processed/`.
+
+Example usage:
+    python src/preprocessing/feature_transformation.py --kernels 10000 --jobs 2
 """
 
 import os
