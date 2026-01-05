@@ -177,6 +177,7 @@ def ensemble_model(channel_data, report_path):
     channel_data (dict): Dictionary mapping channel names to channel-specific data dicts.
     report_path (str): Path to the output report file.
     """
+    results = {}
     for channel in channel_data: 
         y_pred_one_class_svm = one_class_svm(channel_data[channel])
         y_pred_isolation_forest = isolation_forest(channel_data[channel])
@@ -194,6 +195,7 @@ def ensemble_model(channel_data, report_path):
         precision_1 = precision_score(y_test, y_pred, pos_label=1, zero_division=0)
         recall_1 = recall_score(y_test, y_pred, pos_label=1, zero_division=0)
         # f1_1 = f1_score(y_test, y_pred, pos_label=1, zero_division=0)
+        fbeta = fbeta_score(y_test, y_pred, beta=2, pos_label=1)
         fdr = 1 - precision_1
         c_m = confusion_matrix(y_test, y_pred)
         
@@ -202,11 +204,22 @@ def ensemble_model(channel_data, report_path):
             precision=precision_1,
             recall=recall_1,
             fdr=fdr,
+            fbeta=fbeta,
             confusion_matrix=c_m,
             report_path=report_path,
         )
+        
+        results[channel] = {
+            'Precision (anomaly)': precision_1,
+            'Recall (anomaly)': recall_1,
+            'FDR': fdr,
+            'Fβ-score': fbeta,
+        }
+    df = pd.DataFrame.from_dict(results, orient="index")
+    df.index.name = "channel"
+    df.to_csv(f"results/data_frame_format/ensemble.csv")
 
-def save_channel_report(channel: str, precision: float, recall: float, fdr: float, confusion_matrix: np.ndarray, report_path: str):
+def save_channel_report(channel: str, precision: float, recall: float, fdr: float, fbeta: float, confusion_matrix: np.ndarray, report_path: str):
     """
     Save a human-readable evaluation report for one channel.
     
@@ -215,6 +228,7 @@ def save_channel_report(channel: str, precision: float, recall: float, fdr: floa
     precision (float): Precision for anomaly class.
     recall (float): Recall for anomaly class.
     fdr (float): False Discovery Rate.
+    fbeta (float): F₂-score.
     confusion_matrix (np.ndarray): 2x2 confusion matrix.
     report_path (str): Output text file path.
     """
@@ -225,15 +239,17 @@ def save_channel_report(channel: str, precision: float, recall: float, fdr: floa
         f.write(f"Precision (anomaly): {precision:.4f}\n")
         f.write(f"Recall (anomaly):    {recall:.4f}\n")
         f.write(f"FDR:                 {fdr:.4f}\n")
+        f.write(f"Fβ-score:            {fbeta:.4f}\n")
         f.write("Confusion matrix:\n")
         f.write(np.array2string(confusion_matrix))
+        f.write("\n")
         f.write("\n")
 
 def main():
     """
     Run Ensemble evaluation across all telemetry channels and save a consolidated report.
     """
-    report_path = f"results/ensemble.txt"
+    report_path = f"results/text_format/ensemble.txt"
     channels = load_channels()
 
     with open(report_path, "w") as f:

@@ -7,6 +7,7 @@ Best threshold: -49.5089
 Precision (anomaly): 0.1200
 Recall (anomaly):    0.4286
 FDR:                 0.8800
+Fβ-score:            0.2830
 Confusion matrix:
 [[334  22]
  [  4   3]]
@@ -17,6 +18,7 @@ Best threshold: -2.9632
 Precision (anomaly): 0.0447
 Recall (anomaly):    0.6078
 FDR:                 0.9553
+Fβ-score:            0.1728
 Confusion matrix:
 [[1692  662]
  [  20   31]]
@@ -27,6 +29,7 @@ Best threshold: -0.6534
 Precision (anomaly): 0.1005
 Recall (anomaly):    0.2063
 FDR:                 0.8995
+Fβ-score:            0.1705
 Confusion matrix:
 [[754 349]
  [150  39]]
@@ -37,6 +40,7 @@ Best threshold: -1.1175
 Precision (anomaly): 0.2118
 Recall (anomaly):    0.7200
 FDR:                 0.7882
+Fβ-score:            0.4865
 Confusion matrix:
 [[275  67]
  [  7  18]]
@@ -47,6 +51,7 @@ Best threshold: -5.7224
 Precision (anomaly): 0.0613
 Recall (anomaly):    0.1115
 FDR:                 0.9387
+Fβ-score:            0.0958
 Confusion matrix:
 [[1868  950]
  [ 494   62]]
@@ -57,6 +62,7 @@ Best threshold: -8.3335
 Precision (anomaly): 0.1016
 Recall (anomaly):    0.2393
 FDR:                 0.8984
+Fβ-score:            0.1882
 Confusion matrix:
 [[773 345]
  [124  39]]
@@ -67,6 +73,7 @@ Best threshold: -11.4738
 Precision (anomaly): 0.2797
 Recall (anomaly):    0.3708
 FDR:                 0.7203
+Fβ-score:            0.3482
 Confusion matrix:
 [[2670 1035]
  [ 682  402]]
@@ -77,6 +84,7 @@ Best threshold: -10.2336
 Precision (anomaly): 0.1567
 Recall (anomaly):    0.4272
 FDR:                 0.8433
+Fβ-score:            0.3176
 Confusion matrix:
 [[3494 1388]
  [ 346  258]]
@@ -87,6 +95,7 @@ Best threshold: -42.8808
 Precision (anomaly): 1.0000
 Recall (anomaly):    0.3333
 FDR:                 0.0000
+Fβ-score:            0.3846
 Confusion matrix:
 [[397   0]
  [  4   2]]
@@ -97,6 +106,7 @@ Best threshold: -9.1533
 Precision (anomaly): 0.2607
 Recall (anomaly):    0.3932
 FDR:                 0.7393
+Fβ-score:            0.3569
 Confusion matrix:
 [[1432  329]
  [ 179  116]]

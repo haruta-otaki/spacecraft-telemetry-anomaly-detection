@@ -58,7 +58,7 @@ def predict(threshold, decision_scores):
             y_pred.append(0)
     return np.array(y_pred)
 
-def local_outlier_factor(channel_data, channel, report_path):
+def local_outlier_factor(channel_data, channel, report_path, results):
     """
     Train and evaluate a Local Outlier Factor for a single telemetry channel.
     The function computes decision scores on test data and sweeps percentile-based thresholds,
@@ -70,6 +70,7 @@ def local_outlier_factor(channel_data, channel, report_path):
     channel (str): Channel identifier
     report_path (str): Path to the text file where results are appended
     """
+
     clf = LocalOutlierFactor(n_neighbors=50, novelty=True)
     clf.fit(channel_data["train"])
     decision_scores = clf.decision_function(channel_data["test"])
@@ -94,6 +95,8 @@ def local_outlier_factor(channel_data, channel, report_path):
 
     y_test = channel_data["label"]
     y_pred = predict(best_threshold, decision_scores)
+
+    fbeta = fbeta_score(y_test, y_pred, beta=2, pos_label=1)
     fdr = 1 - best_scores[1]
     c_m = confusion_matrix(y_test, y_pred)
     
@@ -103,11 +106,22 @@ def local_outlier_factor(channel_data, channel, report_path):
         precision=best_scores[1],
         recall=best_scores[0],
         fdr=fdr,
+        fbeta=fbeta, 
         confusion_matrix=c_m,
         report_path=report_path,
     )
 
-def save_channel_report(channel: str, best_threshold: float, precision: float, recall: float, fdr: float, confusion_matrix: np.ndarray, report_path: str):
+    results[channel] = {
+            'Precision (anomaly)': best_scores[1],
+            'Recall (anomaly)': best_scores[0],
+            'FDR': fdr,
+            'Fβ-score': fbeta,
+    }
+    df = pd.DataFrame.from_dict(results, orient="index")
+    df.index.name = "channel"
+    df.to_csv(f"results/data_frame_format/local_outlier_factor.csv")
+
+def save_channel_report(channel: str, best_threshold: float, precision: float, recall: float, fdr: float, fbeta: float, confusion_matrix: np.ndarray, report_path: str):
     """
     Save a human-readable evaluation report for one channel.
     
@@ -117,6 +131,7 @@ def save_channel_report(channel: str, best_threshold: float, precision: float, r
     precision (float): Precision for anomaly class.
     recall (float): Recall for anomaly class.
     fdr (float): False Discovery Rate.
+    fbeta (float): F₂-score.
     confusion_matrix (np.ndarray): 2x2 confusion matrix.
     report_path (str): Output text file path.
     """
@@ -128,6 +143,7 @@ def save_channel_report(channel: str, best_threshold: float, precision: float, r
         f.write(f"Precision (anomaly): {precision:.4f}\n")
         f.write(f"Recall (anomaly):    {recall:.4f}\n")
         f.write(f"FDR:                 {fdr:.4f}\n")
+        f.write(f"Fβ-score:            {fbeta:.4f}\n")
         f.write("Confusion matrix:\n")
         f.write(np.array2string(confusion_matrix))
         f.write("\n")
@@ -137,7 +153,9 @@ def main():
     """
     Run Local Outlier Factor evaluation across all telemetry channels and save a consolidated report.
     """
-    report_path = f"results/local_outlier_factor.txt"
+    results = {}
+
+    report_path = f"results/text_format/local_outlier_factor.txt"
     channels = load_channels()
 
     with open(report_path, "w") as f:
@@ -146,7 +164,7 @@ def main():
     
     standard_fitted_data = load_data(channels)
     for channel in standard_fitted_data:
-        local_outlier_factor(standard_fitted_data[channel], channel, report_path)
+        local_outlier_factor(standard_fitted_data[channel], channel, report_path, results)
     
     print("[✓] Predicted all telemetry anomaly data with local outlier factor")
 

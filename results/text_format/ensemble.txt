@@ -6,78 +6,98 @@ Channel R
 Precision (anomaly): 0.1200
 Recall (anomaly):    0.4286
 FDR:                 0.8800
+Fβ-score:            0.2830
 Confusion matrix:
 [[334  22]
  [  4   3]]
+
 Channel G
 ---------
 Precision (anomaly): 0.0309
 Recall (anomaly):    0.7843
 FDR:                 0.9691
+Fβ-score:            0.1334
 Confusion matrix:
 [[1099 1255]
  [  11   40]]
+
 Channel T
 ---------
 Precision (anomaly): 0.1398
 Recall (anomaly):    0.5926
 FDR:                 0.8602
+Fβ-score:            0.3597
 Confusion matrix:
 [[414 689]
  [ 77 112]]
+
 Channel S
 ---------
 Precision (anomaly): 0.1325
 Recall (anomaly):    0.8000
 FDR:                 0.8675
+Fβ-score:            0.3984
 Confusion matrix:
 [[211 131]
  [  5  20]]
+
 Channel A
 ---------
 Precision (anomaly): 0.0519
 Recall (anomaly):    0.1331
 FDR:                 0.9481
+Fβ-score:            0.1014
 Confusion matrix:
 [[1466 1352]
  [ 482   74]]
+
 Channel F
 ---------
 Precision (anomaly): 0.1431
 Recall (anomaly):    0.4356
 FDR:                 0.8569
+Fβ-score:            0.3092
 Confusion matrix:
 [[693 425]
  [ 92  71]]
+
 Channel D
 ---------
 Precision (anomaly): 0.2921
 Recall (anomaly):    0.6338
 FDR:                 0.7079
+Fβ-score:            0.5136
 Confusion matrix:
 [[2040 1665]
  [ 397  687]]
+
 Channel E
 ---------
 Precision (anomaly): 0.1265
 Recall (anomaly):    0.5464
 FDR:                 0.8735
+Fβ-score:            0.3284
 Confusion matrix:
 [[2603 2279]
  [ 274  330]]
+
 Channel B
 ---------
 Precision (anomaly): 0.1034
 Recall (anomaly):    0.5000
 FDR:                 0.8966
+Fβ-score:            0.2830
 Confusion matrix:
 [[371  26]
  [  3   3]]
+
 Channel P
 ---------
 Precision (anomaly): 0.1981
 Recall (anomaly):    0.5729
 FDR:                 0.8019
+Fβ-score:            0.4156
 Confusion matrix:
 [[1077  684]
  [ 126  169]]
+

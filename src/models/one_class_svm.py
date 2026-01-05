@@ -59,7 +59,7 @@ def predict(threshold, decision_scores):
             y_pred.append(0)
     return np.array(y_pred)
 
-def one_class_svm(channel_data, channel, report_path):
+def one_class_svm(channel_data, channel, report_path, results):
     """
     Train and evaluate a One-Class SVM for a single telemetry channel.
     The function computes decision scores on test data and sweeps percentile-based thresholds,
@@ -94,6 +94,7 @@ def one_class_svm(channel_data, channel, report_path):
     
     y_test = channel_data["label"]
     y_pred = predict(best_threshold, decision_scores)
+    fbeta = fbeta_score(y_test, y_pred, beta=2, pos_label=1)
     fdr = 1 - best_scores[1]
     c_m = confusion_matrix(y_test, y_pred)
     
@@ -103,11 +104,22 @@ def one_class_svm(channel_data, channel, report_path):
         precision=best_scores[1],
         recall=best_scores[0],
         fdr=fdr,
+        fbeta=fbeta, 
         confusion_matrix=c_m,
         report_path=report_path,
     )
+    
+    results[channel] = {
+            'Precision (anomaly)': best_scores[1],
+            'Recall (anomaly)': best_scores[0],
+            'FDR': fdr,
+            'Fβ-score': fbeta,
+    }
+    df = pd.DataFrame.from_dict(results, orient="index")
+    df.index.name = "channel"
+    df.to_csv(f"results/data_frame_format/one_class_svm.csv")
 
-def save_channel_report(channel: str, best_threshold: float, precision: float, recall: float, fdr: float, confusion_matrix: np.ndarray, report_path: str):
+def save_channel_report(channel: str, best_threshold: float, precision: float, recall: float, fdr: float, fbeta: float, confusion_matrix: np.ndarray, report_path: str):
     """
     Save a human-readable evaluation report for one channel.
     
@@ -117,6 +129,7 @@ def save_channel_report(channel: str, best_threshold: float, precision: float, r
     precision (float): Precision for anomaly class.
     recall (float): Recall for anomaly class.
     fdr (float): False Discovery Rate.
+    fbeta (float): F₂-score.
     confusion_matrix (np.ndarray): 2x2 confusion matrix.
     report_path (str): Output text file path.
     """
@@ -128,6 +141,7 @@ def save_channel_report(channel: str, best_threshold: float, precision: float, r
         f.write(f"Precision (anomaly): {precision:.4f}\n")
         f.write(f"Recall (anomaly):    {recall:.4f}\n")
         f.write(f"FDR:                 {fdr:.4f}\n")
+        f.write(f"Fβ-score:            {fbeta:.4f}\n")
         f.write("Confusion matrix:\n")
         f.write(np.array2string(confusion_matrix))
         f.write("\n")
@@ -137,7 +151,8 @@ def main():
     """
     Run One-Class SVM evaluation across all telemetry channels and save a consolidated report.
     """
-    report_path = f"results/one_class_svm.txt"
+    results = {}
+    report_path = f"results/text_format/one_class_svm.txt"
     channels = load_channels()
 
     with open(report_path, "w") as f:
@@ -146,7 +161,7 @@ def main():
     
     standard_fitted_data = load_data(channels)
     for channel in standard_fitted_data:
-        one_class_svm(standard_fitted_data[channel], channel, report_path)
+        one_class_svm(standard_fitted_data[channel], channel, report_path, results)
     
     print("[✓] Predicted all telemetry anomaly data with one class svm")
 

@@ -7,6 +7,7 @@ Best threshold: -139269365.3952
 Precision (anomaly): 0.2727
 Recall (anomaly):    0.4286
 FDR:                 0.7273
+Fβ-score:            0.3846
 Confusion matrix:
 [[348   8]
  [  4   3]]
@@ -17,6 +18,7 @@ Best threshold: -0.3051
 Precision (anomaly): 0.0415
 Recall (anomaly):    0.5490
 FDR:                 0.9585
+Fβ-score:            0.1595
 Confusion matrix:
 [[1708  646]
  [  23   28]]
@@ -27,6 +29,7 @@ Best threshold: 0.4895
 Precision (anomaly): 0.1340
 Recall (anomaly):    0.2751
 FDR:                 0.8660
+Fβ-score:            0.2273
 Confusion matrix:
 [[767 336]
  [137  52]]
@@ -37,6 +40,7 @@ Best threshold: 0.3777
 Precision (anomaly): 0.2568
 Recall (anomaly):    0.7600
 FDR:                 0.7432
+Fβ-score:            0.5460
 Confusion matrix:
 [[287  55]
  [  6  19]]
@@ -47,6 +51,7 @@ Best threshold: 0.3782
 Precision (anomaly): 0.0415
 Recall (anomaly):    0.0755
 FDR:                 0.9585
+Fβ-score:            0.0649
 Confusion matrix:
 [[1848  970]
  [ 514   42]]
@@ -57,6 +62,7 @@ Best threshold: 0.2179
 Precision (anomaly): 0.1849
 Recall (anomaly):    0.4356
 FDR:                 0.8151
+Fβ-score:            0.3427
 Confusion matrix:
 [[805 313]
  [ 92  71]]
@@ -67,6 +73,7 @@ Best threshold: 0.3358
 Precision (anomaly): 0.2617
 Recall (anomaly):    0.3469
 FDR:                 0.7383
+Fβ-score:            0.3257
 Confusion matrix:
 [[2644 1061]
  [ 708  376]]
@@ -77,6 +84,7 @@ Best threshold: 0.2398
 Precision (anomaly): 0.1543
 Recall (anomaly):    0.4205
 FDR:                 0.8457
+Fβ-score:            0.3127
 Confusion matrix:
 [[3490 1392]
  [ 350  254]]
@@ -87,6 +95,7 @@ Best threshold: -2845454463827.3633
 Precision (anomaly): 1.0000
 Recall (anomaly):    0.3333
 FDR:                 0.0000
+Fβ-score:            0.3846
 Confusion matrix:
 [[397   0]
  [  4   2]]
@@ -97,6 +106,7 @@ Best threshold: 0.3606
 Precision (anomaly): 0.2496
 Recall (anomaly):    0.5220
 FDR:                 0.7504
+Fβ-score:            0.4285
 Confusion matrix:
 [[1298  463]
  [ 141  154]]
