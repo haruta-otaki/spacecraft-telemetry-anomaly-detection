@@ -84,23 +84,20 @@ the SMAP satellite, as the SMAP and MSL datasets differ in sensor dimensionality
 features were on comparable scales. 
 
 ### 2. Feature Extraction
-- **MiniRocket** transforms time-series windows into fixed-length feature vectors, enabling fast training and inference while preserving temporal structure.
+- MiniRocket transforms time-series windows into fixed-length feature vectors, enabling fast training and inference while preserving temporal structure.
 
 ### 3. Models Implemented
 - One-Class SVM 
 - Isolation Forest
 - Local Outlier Factor (LOF)
-- Ensemble model combining multiple detectors
+- Ensemble model
+
+The ensumble model is designed to combine multiple detectors to leverage the complementary strengths of the three algorithms: One-Class SVM defines the boundary of normal data, Isolation Forest isolates anomalies via recursive partitioning, and LOF measures local density deviations. The ensemble applies a “maximum voting” strategy with a threshold of one vote, flagging a test example as anomalous if any model predicts it as suchprioritizing recall.
 
 ### 4. Evaluation Metrics
 - Precision (anomalous class)
 - Recall (anomalous class)
-- Fβ-score
-; this encourages the learning
-algorithms to capture temporal trends and patterns, whilst
-promoting high recall: a single anomalous timestamp con-
-tributes to the anomaly scores of multiple windows, increas-
-ing its likelihood of detection
+- Fβ-score 
 ---
 
 ## Results
@@ -128,6 +125,4 @@ pip install -r requirements.txt
 
 ## Future Work
 
-Potential extensions include:
-- Multi-channel correlation modeling
-- Deep Learning Techniques
+This project is still in progress; currently, deep learning architectures, such as Long Short-Term Memory networks (LSTM) and transformer models are being incorporated in hopes of a better evaluation score. 
