@@ -143,7 +143,7 @@ venv.bak/
 
 # Data directories
 data/*
-!data/README.md
+!data/raw/npy_format
 
 # artifacts
 artifacts/*
