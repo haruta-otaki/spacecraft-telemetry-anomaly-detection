@@ -13,11 +13,6 @@ Pipeline overview:
 5. Apply sliding window segmentation with configurable size and overlap
 6. Assign window-level anomaly labels on test data based on annotated anomaly intervals
 7. Persist processed datasets as NumPy arrays
-
-This script is intended to be run from the project root directory.
-
-Example usage:
-    python src/preprocessing/windowing.py --size 60 --overlap 40
 """
 
 from pathlib import Path
