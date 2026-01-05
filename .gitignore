@@ -142,8 +142,8 @@ env.bak/
 venv.bak/
 
 # Data directories
-data/*
-!data/raw/npy_format
+data/processed/
+data/raw/csv_format/
 
 # artifacts
 artifacts/*
