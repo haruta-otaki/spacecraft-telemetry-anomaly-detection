@@ -3,7 +3,7 @@
 This project implements an unsupervised machine learning approach to detect anomalies in multivariate spacecraft telemetry data. Overlapping temporal windows and MiniRocket feature transformation were used to capture complex temporal patterns in the time series data. Furthermore, an ensemble model was implemented to evaluate each channel, incorporating the following anomaly detection algorithms: One-Class Support Vector Machine, Isolation Forest, and Local
 Outlier Factor. 
 
-The [multivariate spacecraft telemetry data from the Soil Moisture Active Passive satellite](https://www.kaggle.com/datasets/patrickfleith/nasa-anomaly-detection-dataset-smap-msl).was used to train and test the models featured in this project, containing point and contextual anomalies across nine distinct telemetry channels. 
+The [multivariate spacecraft telemetry data from the Soil Moisture Active Passive satellite](https://www.kaggle.com/datasets/patrickfleith/nasa-anomaly-detection-dataset-smap-msl) was used to train and test the models featured in this project, containing point and contextual anomalies across nine distinct telemetry channels. 
 
 The ensemble model achieved an average recall of 0.55 and F1 score of 0.21 across all channels; this is due to the threshold optimisation applied on the decision function outputted by the unsupervised machine learning algorithms. Although this introduces optimistic bias, the technique was implemented because of the small labelled test data for spacecraft anomalies as well as to explore recall-precision trade-offs (as prioritizing recall, reducing the likelihood of missing true anomalies, is cruicial in anomaly detection systems). 
 
