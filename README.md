@@ -39,11 +39,6 @@ project-root/
 │   │
 │   ├── evaluation/           # Metrics, thresholding, and reporting
 │   │   ├── metrics.py
-│   │   ├── thresholding.py
-│   │   └── reporting.py
-│   │
-│   └── utils/                # Shared utilities
-│       └── io.py
 │
 ├── data/
 │   ├── raw/                  # Original SMAP / MSL datasets
@@ -57,8 +52,6 @@ project-root/
 │   │
 │   └── README.md             # Dataset notes
 │
-├── notebooks/
-│   └── exploration.ipynb     # Exploratory analysis
 │
 ├── results/
 │   ├── figures/              # Generated plots
@@ -67,7 +60,6 @@ project-root/
 ├── requirements.txt
 ├── .gitignore
 ├── README.md
-└── setup.py (optional)
 ```
 
 ---
